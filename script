@@ -1,0 +1,19 @@
+create database crud_php;
+
+create table ouvintes(
+	id int auto_increment, 
+	nome varchar(30), 
+	rg char(9), 
+	primary key(id)
+);
+
+create table discos(
+	id int auto_increment,
+	nome varchar(20),
+	artista varchar(30),
+	ano int,
+	ouvinte_id int,
+	primary key(id),
+	foreign key(ouvinte_id) references ouvintes(id)
+);
+
