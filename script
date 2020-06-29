@@ -1,19 +1,41 @@
 create database crud_php;
+use crud_php;
 
-create table ouvintes(
+create table categorias(
+	id int primary key auto_increment,
+	nome varchar(20)
+);
+
+create table livros(
+	id int auto_increment,
+	nome varchar(40) NOT NULL,
+	autor varchar(40) NOT NULL,
+	tema varchar(30) NOT NULL,
+	data_publicacao date  NOT NULL,
+	categoria_id int NOT NULL,
+	quantidade int  NOT NULL,
+	primary key(id),
+	foreign key(categoria_id) references categorias(id)
+);
+
+
+create table usuarios(
 	id int auto_increment, 
-	nome varchar(30), 
-	rg char(9), 
+	nome varchar(50) NOT NULL, 
+	data_nascimento date NOT NULL,
+	grau_escolaridade varchar(30),
+	endereco varchar(50),
+	telefone char(10),
+	email varchar(30),
+	genero char(10), 
 	primary key(id)
 );
 
-create table discos(
-	id int auto_increment,
-	nome varchar(20),
-	artista varchar(30),
-	ano int,
-	ouvinte_id int,
-	primary key(id),
-	foreign key(ouvinte_id) references ouvintes(id)
-);
 
+create table usuarios_livros(
+	usuario_id int NOT NULL,
+	livro_id int NOT NULL,
+	primary key(usuario_id, livro_id),
+	foreign key(usuario_id) references usuarios(id),
+	foreign key(livro_id) references livros(id)
+);
